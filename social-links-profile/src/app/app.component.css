@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: var(--darkGrey);
+  width: 85vw;
+  height: max-content;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.profile__image {
+  border-radius: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 40px;
+}
+
+.profile__name {
+  font-weight: 700;
+}
+
+.profile__location {
+  font-weight: 600;
+  color: var(--activeLink);
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.profile__description {
+  margin-bottom: 25px;
+}
+
+.profile__name, .profile__description, .profile__location {
+  text-align: center;
+}
