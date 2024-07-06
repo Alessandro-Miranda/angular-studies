@@ -13,6 +13,12 @@
   border-radius: 10px;
 }
 
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 450px;
+  }
+}
+
 .profile__image {
   border-radius: 100%;
   display: block;
