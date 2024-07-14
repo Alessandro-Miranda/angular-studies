@@ -1,23 +1,66 @@
 <main>
   <section class="contact__form__section">
     <h1 class="contact__form__title">Contact us</h1>
-    <form class="contact__form">
+    <form class="contact__form" [name]="title" (ngSubmit)="onSubmit()" ngNativeValidate #contactForm="ngForm" >
       <div class="contact__form__nameSection">
         <label for="firstName" class="contact__form__textLabel">First Name *</label>
-        <input type="text" id="firstName" class="contact__form__input__text" />
-        <span class="contact__form__errorMessage">This field is required</span>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          class="contact__form__input__text"
+          [(ngModel)]="name.firstName"
+          [ngClass]="{'invalid': submitForm.touched && !firstName.valid }"
+          #firstName="ngModel"
+          required
+        />
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="submitForm.touched && !firstName.valid"
+        >
+          This field is required
+        </span>
       </div>
 
       <div class="contact__form__nameSection">
         <label for="lastName" class="contact__form__textLabel">Last Name *</label>
-        <input type="text" id="lastName" class="contact__form__input__text" />
-        <span class="contact__form__errorMessage">This field is required</span>
+        <input
+          type="text"
+          id="lastName"
+          class="contact__form__input__text"
+          name="lastName"
+          required
+          [ngClass]="{'invalid': submitForm.touched && !lastName.valid }"
+          [(ngModel)]="name.lastName"
+          #lastName="ngModel"
+        />
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="submitForm.touched && !lastName.valid"
+        >
+          This field is required
+        </span>
       </div>
 
       <div>
         <label for="email" class="contact__form__textLabel">Email Address *</label>
-        <input type="email" id="email" class="contact__form__input__text" />
-        <span class="contact__form__errorMessage">Please enter a valid email address</span>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="contact__form__input__text"
+          [ngClass]="{'invalid': submitForm.touched && !emailInput.valid }"
+          [(ngModel)]="email"
+          required
+          email
+          #emailInput="ngModel"
+        />
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="(emailInput.dirty || emailInput.touched || submitForm.touched) && emailInput.value === ''"
+        >
+          Please enter a valid email address
+        </span>
       </div>
 
       <div class="contact__form__queryType__section">
@@ -25,32 +68,82 @@
         
         <div class="contact__form__queryType__container">
           <label class="contact__form__queryType" for="generalEnquiry">
-            <input type="radio" id="generalEnquiry" name="queryType" />
+            <input
+              type="radio"
+              id="generalEnquiry"
+              name="queryType"
+              value="General Enquiry"
+              [(ngModel)]="queryType"
+              #queryTypeInput="ngModel"
+              required
+            />
             <span>General Enquiry</span>
           </label>
     
           <label for="supportRequest" class="contact__form__queryType">
-            <input type="radio" id="supportRequest" name="queryType" />
+            <input
+              type="radio"
+              id="supportRequest"
+              name="queryType"
+              required
+              value="Support Request"
+              [(ngModel)]="queryType"
+            />
             <span>Support Request</span>
           </label>
         </div>
 
-        <span class="contact__form__errorMessage">Please select a query type</span>
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="!queryTypeInput.valid && submitForm.touched"
+        >
+          Please select a query type
+        </span>
       </div>
 
       <div>
         <label for="message" class="contact__form__textLabel">Message *</label>
-        <textarea id="message" class="contact__form__input__text contact__form__input__text--textArea"></textarea>
-        <span class="contact__form__errorMessage">This field is required</span>
+        <textarea
+          id="message"
+          name="message"
+          class="contact__form__input__text contact__form__input__text--textArea"
+          required
+          [ngClass]="{'invalid': submitForm.touched && !messageField.valid}"
+          [(ngModel)]="message"
+          #messageField="ngModel"
+        ></textarea>
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="submitForm.touched && !messageField.valid"
+        >
+          This field is required
+        </span>
       </div>
 
       <div class="contact__form__consent__section">
-        <input type="checkbox" id="consent" />
-        <label for="consent" class="contact__form__textLabel">I consent to being contacted by the team *</label>
-        <span class="contact__form__errorMessage">To submit this form, please consent to being contacted</span>
+        <div>
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            value="true"
+            required
+            [(ngModel)]="accepted"
+            #consentField="ngModel"
+            [ngClass]="{'invalid': submitForm.touched && !consentField.valid}"
+          />
+          <label for="consent" class="contact__form__textLabel">I consent to being contacted by the team *</label>
+        </div>
+
+        <span
+          class="contact__form__errorMessage"
+          *ngIf="submitForm.touched && !consentField.valid"
+        >
+          To submit this form, please consent to being contacted
+        </span>
       </div>
 
-      <input type="submit" value="Submit" />
+      <input type="submit" name="submit" ngModel="Submit" #submitForm="ngModel" />
     </form>
   </section>
 </main>
